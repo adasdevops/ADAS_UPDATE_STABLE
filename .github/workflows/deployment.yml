@@ -64,22 +64,24 @@ jobs:
         uses: 'azure/aci-deploy@v1'
         with:
             resource-group: ${{ secrets.RESOURCE_GROUP }}
-            dns-name-label: ${{ secrets.RESOURCE_GROUP }}12
+            dns-name-label: ${{ secrets.RESOURCE_GROUP }}
             image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_server:1
+            ports: 8080
             registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             registry-username: ${{ secrets.REGISTRY_USERNAME }}
             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
             name: pmvmubuntu
-            location: 'East US'  
+            location: 'East US' 
+
             
       - name: 'Deploy to Azure Container Instances'
         uses: 'azure/aci-deploy@v1'
         with:
             resource-group: ${{ secrets.RESOURCE_GROUP }}
-            dns-name-label: ${{ secrets.RESOURCE_GROUP }}12
+            dns-name-label: ${{ secrets.RESOURCE_GROUP }}
             image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_ui:1
             registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             registry-username: ${{ secrets.REGISTRY_USERNAME }}
             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-            name: pmvmubuntu
+            name: pmvmui
             location: 'East US' 
