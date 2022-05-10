@@ -61,14 +61,38 @@ jobs:
       - name: Login to ACR
         uses: azure/docker-login@v1   
         with:
-          login-server: lttsadas.azurecr.io
-          username: lttsadas
-          password: k6M17qH9GR6x8pcIIMAmxtGsv84Up=Hd 
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
       - run: |
-          docker tag "openvino/cvat_server:latest" "lttsadas.azurecr.io/cvat_server:1"
-          docker push "lttsadas.azurecr.io/cvat_server:1"
-          docker tag "openvino/cvat_ui:latest" "lttsadas.azurecr.io/cvat_ui:1"
-          docker push "lttsadas.azurecr.io/cvat_ui:1"          
+          docker tag "openvino/cvat_server:latest" "${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_server:1"
+          docker push "${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_server:1"
+          docker tag "openvino/cvat_ui:latest" "${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_ui:1"
+          docker push "${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_ui:1"   
+          
+      - name: Deploy to Azure Container Instances
+        uses: 'azure/aci-deploy@v1'
+        with:
+            resource-group: ${{ secrets.RESOURCE_GROUP }}
+            dns-name-label: ${{ secrets.RESOURCE_GROUP }}12
+            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_server:1
+            registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+            registry-username: ${{ secrets.REGISTRY_USERNAME }}
+            registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+            name: pmvmubuntu
+            location: 'East US'  
+            
+      - name: 'Deploy to Azure Container Instances'
+        uses: 'azure/aci-deploy@v1'
+        with:
+            resource-group: ${{ secrets.RESOURCE_GROUP }}
+            dns-name-label: ${{ secrets.RESOURCE_GROUP }}12
+            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_ui:1
+            registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+            registry-username: ${{ secrets.REGISTRY_USERNAME }}
+            registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+            name: pmvmubuntu
+            location: 'East US'              
 #       - name: Login to Docker Hub
 #         uses: docker/login-action@v1
 #         with:
