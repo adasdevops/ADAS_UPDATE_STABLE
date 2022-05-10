@@ -14,7 +14,7 @@ and UX decisions are based on feedbacks from professional data
 annotation team. Try it online [cvat.org](https://cvat.org).
 
 ![CVAT screenshot](site/content/en/images/cvat.jpg)
-
+jhkjh
 ## Documentation
 
 - [Contributing](https://openvinotoolkit.github.io/cvat/docs/contributing/)
