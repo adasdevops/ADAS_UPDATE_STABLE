@@ -100,4 +100,4 @@ jobs:
             name: pmvmserver
             location: 'East US'
       - run: |
-          docker-compose -f docker-compose.dep.yml up          
+          CLAM_AV=yes INSTALL_SOURCES=yes docker-compose -f docker-compose.dep.yml up          
