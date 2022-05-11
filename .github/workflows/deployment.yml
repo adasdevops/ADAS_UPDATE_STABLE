@@ -60,30 +60,42 @@ jobs:
         with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
           
+#       - name: Deploy to Azure Container Instances
+#         uses: 'azure/aci-deploy@v1'
+#         with:
+#             resource-group: ${{ secrets.RESOURCE_GROUP }}
+#             dns-name-label: ${{ secrets.RESOURCE_GROUP }}1
+#             image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_server:1
+#             ports: 8080
+#             environment-variables: CVAT_POSTGRES_HOST=DB_HOST CVAT_REDIS_HOST=REDIS_HOST
+#             registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+#             registry-username: ${{ secrets.REGISTRY_USERNAME }}
+#             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+#             name: pmvmserver
+#             location: 'East US' 
+
+            
+#       - name: 'Deploy to Azure Container Instances'
+#         uses: 'azure/aci-deploy@v1'
+#         with:
+#             resource-group: ${{ secrets.RESOURCE_GROUP }}
+#             dns-name-label: ${{ secrets.RESOURCE_GROUP }}2
+#             image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_ui:1
+#             ports: 80
+#             registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+#             registry-username: ${{ secrets.REGISTRY_USERNAME }}
+#             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+#             name: pmvmui
+#             location: 'East US' 
       - name: Deploy to Azure Container Instances
         uses: 'azure/aci-deploy@v1'
         with:
             resource-group: ${{ secrets.RESOURCE_GROUP }}
             dns-name-label: ${{ secrets.RESOURCE_GROUP }}1
-            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_server:1
-            ports: 8080
-            environment-variables: CVAT_POSTGRES_HOST=DB_HOST CVAT_REDIS_HOST=REDIS_HOST
             registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             registry-username: ${{ secrets.REGISTRY_USERNAME }}
             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
             name: pmvmserver
             location: 'East US' 
-
-            
-      - name: 'Deploy to Azure Container Instances'
-        uses: 'azure/aci-deploy@v1'
-        with:
-            resource-group: ${{ secrets.RESOURCE_GROUP }}
-            dns-name-label: ${{ secrets.RESOURCE_GROUP }}2
-            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_ui:1
-            ports: 80
-            registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-            registry-username: ${{ secrets.REGISTRY_USERNAME }}
-            registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-            name: pmvmui
-            location: 'East US' 
+        run: |
+          CLAM_AV=yes INSTALL_SOURCES=yes docker-compose -f docker-compose.dep.yml build            
