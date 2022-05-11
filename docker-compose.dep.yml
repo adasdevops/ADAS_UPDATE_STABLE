@@ -2,6 +2,9 @@ version: '3'
 services:
   cvat-server:
     image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_server:1
+    registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+    registry-username: ${{ secrets.REGISTRY_USERNAME }}
+    registry-password: ${{ secrets.REGISTRY_PASSWORD }}    
     container_name: cvat-server
     environment:
       CVAT_POSTGRES_HOST=DB_HOST
