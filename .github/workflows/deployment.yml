@@ -60,7 +60,7 @@ jobs:
             
       - name: 'Run az commands'
         run: |
-          az container create -g ltts-adas-dev-rg --file deploy-aci.yml
+          az container create -g ltts-adas-dev-rg -f deploy-aci.yml
           
           
 #       - name: Deploy to Azure Container Instances
