@@ -60,7 +60,7 @@ jobs:
             
       - name: 'Run az commands'
         run: |
-          az container create --resource-group ltts-adas-dev-rg --name cvat --image lttsadas.azurecr.io/cvat_server:1 --dns-name-label aci-demo --ports 8080
+          az container create --resource-group ltts-adas-dev-rg --name cvat --image lttsadas.azurecr.io/cvat_server:1 --registry-username lttsadas --dns-name-label aci-demo --ports 8080
 #          az container create -g ltts-adas-dev-rg -f ./deploy-aci.yml          
           
           
