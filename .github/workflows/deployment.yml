@@ -102,4 +102,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build images
         run: |
-          CLAM_AV=yes INSTALL_SOURCES=yes docker-compose -f docker-compose.dev.yml up
+          CLAM_AV=yes INSTALL_SOURCES=yes docker-compose -f docker-compose.dep.yml up
