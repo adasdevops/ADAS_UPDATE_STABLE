@@ -6,9 +6,9 @@ services:
 #     registry-username: lttsadas
 #     registry-password: Oed4mAOkftg905BCFoI5jYVepV9KOut+    
     container_name: cvat-server
-    environment:
-      CVAT_POSTGRES_HOST=DB_HOST
-      CVAT_REDIS_HOST=REDIS_HOST
+#     environment:
+#       CVAT_POSTGRES_HOST=DB_HOST
+#       CVAT_REDIS_HOST=REDIS_HOST
     ports:
         - "8080:8080"
 
