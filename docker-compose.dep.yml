@@ -1,8 +1,8 @@
 version: '3'
 services:
   cvat-server:
-    image: cvat_server:1
-    registry-login-server: lttsadas.azurecr.io
+    image: lttsadas.azurecr.io/cvat_server:1
+#     registry-login-server: lttsadas.azurecr.io
     registry-username: lttsadas
     registry-password: Oed4mAOkftg905BCFoI5jYVepV9KOut+    
     container_name: cvat-server
@@ -13,8 +13,8 @@ services:
         - "8080:8080"
 
   cvat-ui:
-    image: cvat_ui:1
-    registry-login-server: lttsadas/azurecr.io
+    image: lttsadas.azurecr.io/cvat_ui:1
+#     registry-login-server: lttsadas/azurecr.io
     registry-username: lttsadas
     registry-password: Oed4mAOkftg905BCFoI5jYVepV9KOut+     
     container_name: cvat-ui
