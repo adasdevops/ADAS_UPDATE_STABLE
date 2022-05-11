@@ -1,7 +1,7 @@
 version: '3'
 services:
   cvat-server:
-    image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_server:1
+    image: cvat_server:1
     registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
     registry-username: ${{ secrets.REGISTRY_USERNAME }}
     registry-password: ${{ secrets.REGISTRY_PASSWORD }}    
@@ -13,7 +13,7 @@ services:
         - "8080:8080"
 
   cvat-ui:
-    image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_ui:1
+    image: cvat_ui:1
     registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
     registry-username: ${{ secrets.REGISTRY_USERNAME }}
     registry-password: ${{ secrets.REGISTRY_PASSWORD }}     
