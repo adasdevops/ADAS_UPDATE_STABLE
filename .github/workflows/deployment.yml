@@ -87,8 +87,10 @@ jobs:
 #             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
 #             name: pmvmui
 #             location: 'East US' 
-      - name: Deploy to Azure Container Instances
-        uses: 'azure/aci-deploy@v1'
+ 
+          
+      - name: Deployment
+        uses: azure/docker-deploy@v1   
         with:
             resource-group: ${{ secrets.RESOURCE_GROUP }}
             dns-name-label: ${{ secrets.RESOURCE_GROUP }}1
@@ -96,6 +98,6 @@ jobs:
             registry-username: ${{ secrets.REGISTRY_USERNAME }}
             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
             name: pmvmserver
-            location: 'East US' 
-        run: |
-          CLAM_AV=yes INSTALL_SOURCES=yes docker-compose -f docker-compose.dep.yml build            
+            location: 'East US'
+      - run: |
+          docker-compose -f docker-compose.dep.yml up          
