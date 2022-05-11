@@ -55,10 +55,10 @@ jobs:
     steps:
   
           
-      - name: 'Login via Azure CLI'
-        uses: azure/login@v1
-        with:
-            creds: ${{ secrets.AZURE_CREDENTIALS }}
+#       - name: 'Login via Azure CLI'
+#         uses: azure/login@v1
+#         with:
+#             creds: ${{ secrets.AZURE_CREDENTIALS }}
           
 #       - name: Deploy to Azure Container Instances
 #         uses: 'azure/aci-deploy@v1'
@@ -88,10 +88,10 @@ jobs:
 #             name: pmvmui
 #             location: 'East US' 
  
-          
-      - name: Deployment
-        uses: azure/docker-deploy@v1   
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
         with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
             resource-group: ${{ secrets.RESOURCE_GROUP }}
             dns-name-label: ${{ secrets.RESOURCE_GROUP }}1
             registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
