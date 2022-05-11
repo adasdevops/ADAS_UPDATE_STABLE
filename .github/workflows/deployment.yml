@@ -60,8 +60,8 @@ jobs:
             
       - name: 'Run az commands'
         run: |
-          az container create --resource-group ltts-adas-dev-rg --name cvatserver --image lttsadas.azurecr.io/cvat_server:1 --registry-username lttsadas --registry-password Oed4mAOkftg905BCFoI5jYVepV9KOut+  --ports 8080  
-          az container create --resource-group ltts-adas-dev-rg --name cvatui --image lttsadas.azurecr.io/cvat_ui:1 --registry-username lttsadas --registry-password Oed4mAOkftg905BCFoI5jYVepV9KOut+  --ports 80 
+          az container create --resource-group ltts-adas-dev-rg --name cvatserver --image lttsadas.azurecr.io/cvat_server:1 --registry-username lttsadas --registry-password Oed4mAOkftg905BCFoI5jYVepV9KOut+  --ports 8080 --dns-name-label lttsadas.azurecr.io1  
+          az container create --resource-group ltts-adas-dev-rg --name cvatui --image lttsadas.azurecr.io/cvat_ui:1 --registry-username lttsadas --registry-password Oed4mAOkftg905BCFoI5jYVepV9KOut+  --ports 80 --dns-name-label lttsadas.azurecr.io2
 #          az container create -g ltts-adas-dev-rg -f ./deploy-aci.yml          
           
           
