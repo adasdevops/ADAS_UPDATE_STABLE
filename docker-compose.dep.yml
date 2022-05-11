@@ -1,0 +1,16 @@
+version: '3'
+services:
+  cvat-server:
+    image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_server:1
+    container_name: cvat-server
+    environment:
+      CVAT_POSTGRES_HOST=DB_HOST
+      CVAT_REDIS_HOST=REDIS_HOST
+    ports:
+        - "8080:8080"
+
+  cvat-ui:
+    image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_ui:1
+    container_name: cvat-ui
+    ports:
+        - "80:80"
