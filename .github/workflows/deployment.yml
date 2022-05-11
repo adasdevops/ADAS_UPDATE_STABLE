@@ -58,53 +58,39 @@ jobs:
         with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
             
-      - name: 'Run az commands'
-        run: |
-          az container create --resource-group ltts-adas-dev-rg --name cvatserver --image lttsadas.azurecr.io/cvat_server:1 --registry-username lttsadas --registry-password Oed4mAOkftg905BCFoI5jYVepV9KOut+  --ports 8080 --dns-name-label lttsadasazurecrio1  
-          az container create --resource-group ltts-adas-dev-rg --name cvatui --image lttsadas.azurecr.io/cvat_ui:1 --registry-username lttsadas --registry-password Oed4mAOkftg905BCFoI5jYVepV9KOut+  --ports 80 --dns-name-label lttsadasazurecrio2
-#          az container create -g ltts-adas-dev-rg -f ./deploy-aci.yml          
+#       - name: 'Run az commands'
+#         run: |
+#           az container create --resource-group ltts-adas-dev-rg --name cvatserver --image lttsadas.azurecr.io/cvat_server:1 --registry-username lttsadas --registry-password Oed4mAOkftg905BCFoI5jYVepV9KOut+  --ports 8080 --dns-name-label lttsadasazurecrio1  
+#           az container create --resource-group ltts-adas-dev-rg --name cvatui --image lttsadas.azurecr.io/cvat_ui:1 --registry-username lttsadas --registry-password Oed4mAOkftg905BCFoI5jYVepV9KOut+  --ports 80 --dns-name-label lttsadasazurecrio2
+# #          az container create -g ltts-adas-dev-rg -f ./deploy-aci.yml          
           
           
-#       - name: Deploy to Azure Container Instances
-#         uses: 'azure/aci-deploy@v1'
-#         with:
-#             resource-group: ${{ secrets.RESOURCE_GROUP }}
-#             dns-name-label: ${{ secrets.RESOURCE_GROUP }}1
-#             image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_server:1
-#             ports: 8080
-#             environment-variables: CVAT_POSTGRES_HOST=DB_HOST CVAT_REDIS_HOST=REDIS_HOST
-#             registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-#             registry-username: ${{ secrets.REGISTRY_USERNAME }}
-#             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-#             name: pmvmserver
-#             location: 'East US' 
+      - name: Deploy to Azure Container Instances
+        uses: 'azure/aci-deploy@v1'
+        with:
+            resource-group: ${{ secrets.RESOURCE_GROUP }}
+            dns-name-label: lttsadasazurecrio1
+            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_server:1
+            ports: 8080
+            environment-variables: CVAT_POSTGRES_HOST=DB_HOST CVAT_REDIS_HOST=REDIS_HOST
+            registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+            registry-username: ${{ secrets.REGISTRY_USERNAME }}
+            registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+            name: cvatserver
+            location: 'East US' 
 
             
-#       - name: 'Deploy to Azure Container Instances'
-#         uses: 'azure/aci-deploy@v1'
-#         with:
-#             resource-group: ${{ secrets.RESOURCE_GROUP }}
-#             dns-name-label: ${{ secrets.RESOURCE_GROUP }}2
-#             image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_ui:1
-#             ports: 80
-#             registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-#             registry-username: ${{ secrets.REGISTRY_USERNAME }}
-#             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-#             name: pmvmui
-#             location: 'East US' 
+      - name: 'Deploy to Azure Container Instances'
+        uses: 'azure/aci-deploy@v1'
+        with:
+            resource-group: ${{ secrets.RESOURCE_GROUP }}
+            dns-name-label: lttsadasazurecrio2
+            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/cvat_ui:1
+            ports: 80
+            registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+            registry-username: ${{ secrets.REGISTRY_USERNAME }}
+            registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+            name: cvatui
+            location: 'East US' 
  
-#       - name: 'Login via Azure CLI'
-#         uses: azure/login@v1
-#         with:
-#             creds: ${{ secrets.AZURE_CREDENTIALS }}
-#             resource-group: ${{ secrets.RESOURCE_GROUP }}
-#             dns-name-label: ${{ secrets.RESOURCE_GROUP }}1
-#             registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-#             registry-username: ${{ secrets.REGISTRY_USERNAME }}
-#             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-#             name: pmvmserver
-#             location: 'East US'
-#       - uses: actions/checkout@v2
-#       - name: Build images
-#         run: |
-#           CLAM_AV=yes INSTALL_SOURCES=yes docker-compose -f docker-compose.dep.yml up
+
